@@ -9,6 +9,8 @@ namespace RazorApp
 {
     public class FoodModel : PageModel
     {
+
+        public string Blueberries { get; set; }
         public void OnGet()
         {
 

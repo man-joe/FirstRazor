@@ -105,5 +105,4 @@ R:\cs_repos\RazorApp\RazorApp\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.
 R:\cs_repos\RazorApp\RazorApp\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 R:\cs_repos\RazorApp\RazorApp\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 R:\cs_repos\RazorApp\RazorApp\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\RazorApp.MvcApplicationPartsAssemblyInfo.cache
 R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\Food.cshtml.g.cs
