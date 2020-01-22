@@ -11,10 +11,14 @@ namespace RazorApp.Data
         }
 
         public DbSet<Food> Foods { get; set;}
+        public DbSet<Menu> Menus { get; set; }
+        public DbSet<Drink> Drinks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Food>().ToTable("Food");
+            modelBuilder.Entity<Food>().ToTable("Food");
+            modelBuilder.Entity<Menu>().ToTable("Menu");
+            modelBuilder.Entity<Drink>().ToTable("Drink");
         }
     }
 }

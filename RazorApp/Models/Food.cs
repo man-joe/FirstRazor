@@ -11,5 +11,6 @@ namespace RazorApp.Models
         public string Name { get; set; }
         public DateTime ExpirationDate { get; set; }
 
+        public ICollection<Menu> Menus { get; set; }
     }
 }
