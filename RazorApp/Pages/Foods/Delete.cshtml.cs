@@ -12,9 +12,9 @@ namespace RazorApp
 {
     public class DeleteModel : PageModel
     {
-        private readonly RazorApp.Data.FoodContext _context;
+        private readonly RazorApp.Data.RestaurantContext _context;
 
-        public DeleteModel(RazorApp.Data.FoodContext context)
+        public DeleteModel(RazorApp.Data.RestaurantContext context)
         {
             _context = context;
         }
@@ -29,7 +29,7 @@ namespace RazorApp
                 return NotFound();
             }
 
-            Food = await _context.Food.FirstOrDefaultAsync(m => m.FoodID == id);
+            Food = await _context.Foods.FirstOrDefaultAsync(m => m.FoodID == id);
 
             if (Food == null)
             {
@@ -45,11 +45,11 @@ namespace RazorApp
                 return NotFound();
             }
 
-            Food = await _context.Food.FindAsync(id);
+            Food = await _context.Foods.FindAsync(id);
 
             if (Food != null)
             {
-                _context.Food.Remove(Food);
+                _context.Foods.Remove(Food);
                 await _context.SaveChangesAsync();
             }
 

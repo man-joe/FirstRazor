@@ -13,9 +13,9 @@ namespace RazorApp
 {
     public class EditModel : PageModel
     {
-        private readonly RazorApp.Data.FoodContext _context;
+        private readonly RazorApp.Data.RestaurantContext _context;
 
-        public EditModel(RazorApp.Data.FoodContext context)
+        public EditModel(RazorApp.Data.RestaurantContext context)
         {
             _context = context;
         }
@@ -30,7 +30,7 @@ namespace RazorApp
                 return NotFound();
             }
 
-            Food = await _context.Food.FirstOrDefaultAsync(m => m.FoodID == id);
+            Food = await _context.Foods.FirstOrDefaultAsync(m => m.FoodID == id);
 
             if (Food == null)
             {
@@ -71,7 +71,7 @@ namespace RazorApp
 
         private bool FoodExists(int id)
         {
-            return _context.Food.Any(e => e.FoodID == id);
+            return _context.Foods.Any(e => e.FoodID == id);
         }
     }
 }

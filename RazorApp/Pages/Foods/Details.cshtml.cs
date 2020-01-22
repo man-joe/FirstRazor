@@ -12,9 +12,9 @@ namespace RazorApp
 {
     public class DetailsModel : PageModel
     {
-        private readonly RazorApp.Data.FoodContext _context;
+        private readonly RazorApp.Data.RestaurantContext _context;
 
-        public DetailsModel(RazorApp.Data.FoodContext context)
+        public DetailsModel(RazorApp.Data.RestaurantContext context)
         {
             _context = context;
         }
@@ -28,7 +28,7 @@ namespace RazorApp
                 return NotFound();
             }
 
-            Food = await _context.Food.FirstOrDefaultAsync(m => m.FoodID == id);
+            Food = await _context.Foods.FirstOrDefaultAsync(m => m.FoodID == id);
 
             if (Food == null)
             {

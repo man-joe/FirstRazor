@@ -12,9 +12,9 @@ namespace RazorApp
 {
     public class IndexModel : PageModel
     {
-        private readonly RazorApp.Data.FoodContext _context;
+        private readonly RazorApp.Data.RestaurantContext _context;
 
-        public IndexModel(RazorApp.Data.FoodContext context)
+        public IndexModel(RazorApp.Data.RestaurantContext context)
         {
             _context = context;
         }
@@ -23,7 +23,7 @@ namespace RazorApp
 
         public async Task OnGetAsync()
         {
-            Food = await _context.Food.ToListAsync();
+            Food = await _context.Foods.ToListAsync();
         }
     }
 }

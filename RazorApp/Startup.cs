@@ -27,7 +27,7 @@ namespace RazorApp
         {
             services.AddRazorPages();
 
-            services.AddDbContext<FoodContext>(options =>
+            services.AddDbContext<RestaurantContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("FoodContext")));
         }
 

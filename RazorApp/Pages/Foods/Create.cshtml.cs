@@ -12,9 +12,9 @@ namespace RazorApp
 {
     public class CreateModel : PageModel
     {
-        private readonly RazorApp.Data.FoodContext _context;
+        private readonly RazorApp.Data.RestaurantContext _context;
 
-        public CreateModel(RazorApp.Data.FoodContext context)
+        public CreateModel(RazorApp.Data.RestaurantContext context)
         {
             _context = context;
         }
@@ -36,7 +36,7 @@ namespace RazorApp
                 return Page();
             }
 
-            _context.Food.Add(Food);
+            _context.Foods.Add(Food);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
