@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using RazorApp.Data;
 using RazorApp.Models;
 
-namespace RazorApp
+namespace RazorApp.Pages.Foods
 {
     public class CreateModel : PageModel
     {
@@ -31,7 +31,8 @@ namespace RazorApp
         // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+
+            /*if (!ModelState.IsValid)
             {
                 return Page();
             }
@@ -39,7 +40,20 @@ namespace RazorApp
             _context.Foods.Add(Food);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index");*/
+
+            var emptyFood = new Food();
+            if(await TryUpdateModelAsync<Food> (
+                emptyFood,
+                "food",
+                f => f.Name, f => f.ExpirationDate))
+            {
+                _context.Foods.Add(emptyFood);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+
+            return Page();
         }
     }
 }

@@ -8,7 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using RazorApp.Data;
 using RazorApp.Models;
 
-namespace RazorApp
+
+namespace RazorApp.Pages.Foods
 {
     public class DetailsModel : PageModel
     {
@@ -21,6 +22,7 @@ namespace RazorApp
 
         public Food Food { get; set; }
 
+        #region snippet_OngetAsync
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -28,7 +30,12 @@ namespace RazorApp
                 return NotFound();
             }
 
-            Food = await _context.Foods.FirstOrDefaultAsync(m => m.FoodID == id);
+            /*Food = await _context.Foods.FirstOrDefaultAsync(m => m.FoodID == id);*/
+            Food = await _context.Foods
+                .Include(f => f.Menus)
+                .ThenInclude(m => m.Drink)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(s => s.FoodID == id);
 
             if (Food == null)
             {
@@ -36,5 +43,6 @@ namespace RazorApp
             }
             return Page();
         }
+        #endregion
     }
 }

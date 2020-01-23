@@ -1,5 +1,5 @@
 ﻿@page
-@model RazorApp.DetailsModel
+@model RazorApp.Pages.Foods.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -23,6 +23,32 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Food.ExpirationDate)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Food.Menus)
+        </dt>
+        
+        
+        <dd class=" = col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Drink Name</th>
+                    <th>Size</th>
+                </tr>
+                @foreach (var item in Model.Food.Menus)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Drink.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Drink.Size)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+
+
     </dl>
 </div>
 <div>

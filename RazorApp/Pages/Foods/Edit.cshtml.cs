@@ -30,7 +30,8 @@ namespace RazorApp
                 return NotFound();
             }
 
-            Food = await _context.Foods.FirstOrDefaultAsync(m => m.FoodID == id);
+            /*Food = await _context.Foods.FirstOrDefaultAsync(m => m.FoodID == id);*/
+            Food = await _context.Foods.FindAsync(id);
 
             if (Food == null)
             {
@@ -41,8 +42,26 @@ namespace RazorApp
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
+            var foodToUpdate = await _context.Foods.FindAsync(id);
+
+            if(foodToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            if(await TryUpdateModelAsync<Food> (
+                foodToUpdate,
+                "food",
+                f => f.Name, f => f.ExpirationDate))
+            {
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            return Page();
+
+            /*
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -67,6 +86,7 @@ namespace RazorApp
             }
 
             return RedirectToPage("./Index");
+            */
         }
 
         private bool FoodExists(int id)

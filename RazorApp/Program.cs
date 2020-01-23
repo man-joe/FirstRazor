@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
+using RazorApp.Data;
 
 namespace RazorApp
 {
@@ -15,12 +16,12 @@ namespace RazorApp
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-            //CreateDbIfNotExists(host);
+            CreateDbIfNotExists(host);
                 
             host.Run();
         }
 
-       /* private static void CreateDbIfNotExists(IHost host)
+        private static void CreateDbIfNotExists(IHost host)
         {
             using (var scope = host.Services.CreateScope())
             {
@@ -28,11 +29,19 @@ namespace RazorApp
 
                 try
                 {
-                    var context = services.GetRequiredService<>
+                    var context = services.GetRequiredService<RestaurantContext>();
+                    //Gets replaced by DbInitializer which will check first then add test data
+                    //context.Database.EnsureCreated();
+                    DbInitializer.Initialize(context);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occured creating the DB.");
                 }
             }
-            throw new NotImplementedException();
-        }*/
+            /*throw new NotImplementedException();*/
+        }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)

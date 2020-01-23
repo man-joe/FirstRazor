@@ -28,7 +28,7 @@ namespace RazorApp
             services.AddRazorPages();
 
             services.AddDbContext<RestaurantContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("FoodContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("RestaurantContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

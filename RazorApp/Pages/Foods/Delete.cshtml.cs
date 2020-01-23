@@ -21,19 +21,27 @@ namespace RazorApp
 
         [BindProperty]
         public Food Food { get; set; }
+        public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Food = await _context.Foods.FirstOrDefaultAsync(m => m.FoodID == id);
+            Food = await _context.Foods
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.FoodID == id);
 
             if (Food == null)
             {
                 return NotFound();
+            }
+
+            if(saveChangesError.GetValueOrDefault())
+            {
+                ErrorMessage = "Delete failed. Try again";
             }
             return Page();
         }
@@ -45,7 +53,29 @@ namespace RazorApp
                 return NotFound();
             }
 
-            Food = await _context.Foods.FindAsync(id);
+            var food = await _context.Foods.FindAsync(id);
+
+            if(food == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                _context.Foods.Remove(food);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            catch (DbUpdateException)
+            {
+                //Log the error(uncomment ex variable name and write a log.)
+                return RedirectToAction("./Delete",
+                                     new { id, saveChangesError = true });
+            }
+
+
+
+            /*Food = await _context.Foods.FindAsync(id);
 
             if (Food != null)
             {
@@ -53,7 +83,7 @@ namespace RazorApp
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index");*/
         }
     }
 }
