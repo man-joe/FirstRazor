@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using RazorApp.Data;
 using RazorApp.Models;
 
-namespace RazorApp
+namespace RazorApp.Pages.Foods
 {
     public class IndexModel : PageModel
     {
@@ -19,11 +19,50 @@ namespace RazorApp
             _context = context;
         }
 
-        public IList<Food> Food { get;set; }
+
+        /// <summary>
+        /// Adds Sorting to Foods
+        /// </summary>
+        public string NameSort { get; set; }
+        public string DateSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
+
+        public IList<Food> Foods { get; set; }
+
+        public async Task OnGetAsync(string sortOrder)
+        {
+            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : ""; // If string is empty, default to names to descending order
+            DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+
+            IQueryable<Food> foodIQ = from f in _context.Foods
+                                      select f;
+
+            switch(sortOrder)
+            {
+                case "name_desc":
+                    foodIQ = foodIQ.OrderByDescending(f => f.Name);
+                    break;
+                case "Date":
+                    foodIQ = foodIQ.OrderBy(f => f.ExpirationDate);
+                    break;
+                case "date_desc":
+                    foodIQ = foodIQ.OrderByDescending(f => f.ExpirationDate);
+                    break;
+                default:
+                    foodIQ = foodIQ.OrderBy(f => f.Name);
+                    break;
+            }
+
+            Foods = await foodIQ.AsNoTracking().ToListAsync();
+        }
+
+
+      /*  public IList<Food> Food { get;set; }
 
         public async Task OnGetAsync()
         {
             Food = await _context.Foods.ToListAsync();
-        }
+        }*/
     }
 }

@@ -12,9 +12,11 @@ namespace RazorApp.Data
     {
         public static void Initialize(RestaurantContext context)
         {
-            context.Database.EnsureCreated();
-
+            context.Database.EnsureDeleted(); // makes sure the database starts fresh by deleting any old databases
+            context.Database.EnsureCreated(); // creates new database if there isn't one already. 
+            
             // Looks for any Food
+            // Change conditional to check for all models 
             if (context.Foods.Any())
             {
                 return; //DB has been seeded aka has foods
@@ -33,7 +35,7 @@ namespace RazorApp.Data
             {
                 context.Foods.Add(f);
             }
-            context.SaveChanges();
+           /* context.SaveChanges();*/
 
             
             //Initialize Drinks
@@ -54,12 +56,12 @@ namespace RazorApp.Data
             //Initialize Menus
             var menus = new Menu[]
             {
-                new Menu{FoodID=2,DrinkID=1001,HealthGrade=HealthGrade.F},
-                new Menu{FoodID=2,DrinkID=1002,HealthGrade=HealthGrade.C},
-                new Menu{FoodID=3,DrinkID=1003,HealthGrade=HealthGrade.D},
-                new Menu{FoodID=3,DrinkID=1002,HealthGrade=HealthGrade.B},
-                new Menu{FoodID=4,DrinkID=1002,HealthGrade=HealthGrade.A},
-                new Menu{FoodID=4,DrinkID=1003,HealthGrade=HealthGrade.D}
+                new Menu{FoodID=1,DrinkID=1001,HealthGrade=HealthGrade.F},
+                new Menu{FoodID=1,DrinkID=1002,HealthGrade=HealthGrade.C},
+                new Menu{FoodID=2,DrinkID=1003,HealthGrade=HealthGrade.D},
+                new Menu{FoodID=2,DrinkID=1002,HealthGrade=HealthGrade.B},
+                new Menu{FoodID=3,DrinkID=1002,HealthGrade=HealthGrade.A},
+                new Menu{FoodID=3,DrinkID=1003,HealthGrade=HealthGrade.D}
             };
             foreach(Menu m in menus)
             {
