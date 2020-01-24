@@ -28,15 +28,35 @@ namespace RazorApp.Pages.Foods
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
-        public IList<Food> Foods { get; set; }
+        public PaginatedList<Food> Foods { get; set; }
 
-        public async Task OnGetAsync(string sortOrder)
+       /* public IList<Food> Foods { get; set; }*/
+
+        public async Task OnGetAsync(string sortOrder,
+            string currentFilter, string searchString, int? pageIndex)
         {
+            CurrentSort = sortOrder;
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : ""; // If string is empty, default to names to descending order
             DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+            if(searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            CurrentFilter = searchString;
 
             IQueryable<Food> foodIQ = from f in _context.Foods
                                       select f;
+
+            if(!String.IsNullOrEmpty(searchString))
+            {
+                foodIQ = foodIQ.Where(f => f.Name.Contains(searchString));
+            }
+
 
             switch(sortOrder)
             {
@@ -54,7 +74,10 @@ namespace RazorApp.Pages.Foods
                     break;
             }
 
-            Foods = await foodIQ.AsNoTracking().ToListAsync();
+            int pageSize = 3;
+
+            Foods = await PaginatedList<Food>.CreateAsync(
+                foodIQ.AsNoTracking(), pageIndex ?? 1, pageSize); // resets page index to 1 when there's a new string search string
         }
 
 

@@ -163,3 +163,4 @@ R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\Foods\Delete.c
 R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\Foods\Details.cshtml.g.cs
 R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\Foods\Edit.cshtml.g.cs
 R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\Foods\Index.cshtml.g.cs
+R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\About.cshtml.g.cs

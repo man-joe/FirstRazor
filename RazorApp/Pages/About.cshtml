@@ -1,0 +1,31 @@
+﻿@page
+@model RazorApp.Pages.AboutModel
+@{
+    ViewData["Title"] = "Restaurant Statistics";
+}
+
+<h1>Restaurant Statistics</h1>
+
+<table>
+    <tr>
+        <th>
+            Menu Date
+        </th>
+        <th>
+            Foods
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Foods)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MenuDate)
+            </td>
+            <td>
+                @item.FoodCount
+            </td>
+        </tr>
+    }
+
+</table>
