@@ -157,10 +157,13 @@ R:\cs_repos\RazorApp\RazorApp\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_
 R:\cs_repos\RazorApp\RazorApp\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 R:\cs_repos\RazorApp\RazorApp\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 R:\cs_repos\RazorApp\RazorApp\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\RazorApp.MvcApplicationPartsAssemblyInfo.cache
 R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\Foods\Create.cshtml.g.cs
 R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\Foods\Delete.cshtml.g.cs
 R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\Foods\Details.cshtml.g.cs
 R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\Foods\Edit.cshtml.g.cs
 R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\Foods\Index.cshtml.g.cs
 R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\About.cshtml.g.cs
+R:\cs_repos\RazorApp\RazorApp\bin\Debug\netcoreapp3.1\MailKit.dll
+R:\cs_repos\RazorApp\RazorApp\bin\Debug\netcoreapp3.1\MimeKit.dll
+R:\cs_repos\RazorApp\RazorApp\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\RazorApp.MvcApplicationPartsAssemblyInfo.cache
