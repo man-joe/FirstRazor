@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using RazorApp.Data;
 using RazorApp.Models;
 
-namespace RazorApp.Pages.Foods
+namespace RazorApp.Pages.Companies
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace RazorApp.Pages.Foods
         }
 
         [BindProperty]
-        public Food Food { get; set; }
+        public Company Company { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,10 +30,9 @@ namespace RazorApp.Pages.Foods
                 return NotFound();
             }
 
-            /*Food = await _context.Foods.FirstOrDefaultAsync(m => m.FoodID == id);*/
-            Food = await _context.Foods.FindAsync(id);
+            Company = await _context.Companies.FirstOrDefaultAsync(m => m.CompanyID == id);
 
-            if (Food == null)
+            if (Company == null)
             {
                 return NotFound();
             }
@@ -42,32 +41,14 @@ namespace RazorApp.Pages.Foods
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync()
         {
-            var foodToUpdate = await _context.Foods.FindAsync(id);
-
-            if(foodToUpdate == null)
-            {
-                return NotFound();
-            }
-
-            if(await TryUpdateModelAsync<Food> (
-                foodToUpdate,
-                "food",
-                f => f.Name, f => f.ExpirationDate))
-            {
-                await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
-            }
-            return Page();
-
-            /*
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Food).State = EntityState.Modified;
+            _context.Attach(Company).State = EntityState.Modified;
 
             try
             {
@@ -75,7 +56,7 @@ namespace RazorApp.Pages.Foods
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FoodExists(Food.FoodID))
+                if (!CompanyExists(Company.CompanyID))
                 {
                     return NotFound();
                 }
@@ -86,12 +67,11 @@ namespace RazorApp.Pages.Foods
             }
 
             return RedirectToPage("./Index");
-            */
         }
 
-        private bool FoodExists(int id)
+        private bool CompanyExists(int id)
         {
-            return _context.Foods.Any(e => e.FoodID == id);
+            return _context.Companies.Any(e => e.CompanyID == id);
         }
     }
 }

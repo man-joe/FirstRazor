@@ -1,0 +1,123 @@
+﻿@page "{id:int?}"
+@model RazorApp.Pages.Companies.IndexModel
+
+@{
+    ViewData["Title"] = "Companies";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Founded Date</th>
+            <th>Company HQ</th>
+            <th>Drinks</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CompanyData.Companies)
+        {
+            string selectedRow = "";
+            if(item.CompanyID == Model.CompanyID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FoundedDate)
+                </td>
+                <td>
+                    @if(item.CompanyHQ != null)
+                    {
+                        @item.CompanyHQ.Location
+                    }
+                </td>
+                <td>
+                    @{ 
+                        foreach (var drink in item.DrinkAssignments)
+                        {
+                            @drink.Drink.DrinkID @: @drink.Drink.Name <br />
+                        }
+                    }
+                </td>
+
+                <td>
+                    <a asp-page="./Index" asp-route-id="@item.CompanyID">Select</a> |
+                    <a asp-page="./Edit" asp-route-id="@item.CompanyID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.CompanyID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.CompanyID">Delete</a>
+                </td>
+            </tr>
+}
+    </tbody>
+</table>
+
+@if(Model.CompanyData.Drinks != null)
+{
+    <h3>Drinks offered by Selected Company</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Drink ID</th>
+            <th>Name</th>
+            <th>Drink Category</th>
+        </tr>
+
+        @foreach (var item in Model.CompanyData.Drinks)
+        {
+            string selectedRow = "";
+            if (item.DrinkID == Model.DrinkID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    <a asp-page="./Index" asp-route-drinkID="@item.DrinkID">Select</a>
+                </td>
+                <td>
+                    @item.DrinkID
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.DrinkCategory.Name
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@if (Model.CompanyData.Menus != null)
+{
+    <h3>
+        Foods Listed in Selected Menu
+    </h3>
+
+    <table class="table">
+        <tr>
+            <th>Food Name</th>
+            <th>Health Grade</th>
+        </tr>
+        @foreach (var item in Model.CompanyData.Menus)
+        {
+            <tr>
+                <td>
+                    @item.Food.Name
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HealthGrade)
+                </td>
+            </tr>
+        }
+    </table>
+}

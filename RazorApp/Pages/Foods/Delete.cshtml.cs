@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using RazorApp.Data;
 using RazorApp.Models;
 
-namespace RazorApp
+namespace RazorApp.Pages.Foods
 {
     public class DeleteModel : PageModel
     {

@@ -10,7 +10,7 @@ namespace RazorApp.Models
     public class Drink
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Display(Name = "Number")]
+        [Display(Name = "DrinkID")]
         public int DrinkID { get; set; }
         
         [StringLength(50, MinimumLength = 3)]
