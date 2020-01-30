@@ -1,12 +1,11 @@
 ﻿@page
 @model RazorApp.Pages.Companies.EditModel
 
-@{
-    ViewData["Title"] = "Edit";
+@{ 
+    ViewContext.ViewData["Title"] = "Edit";
 }
 
 <h1>Edit</h1>
-
 <h4>Company</h4>
 <hr />
 <div class="row">
@@ -25,8 +24,50 @@
                 <span asp-validation-for="Company.FoundedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="Company.CompanyHQ.Location" class="control-label"></label>
+                <input asp-for="Company.CompanyHQ.Location" class="form-control" />
+                <span asp-validation-for="Company.CompanyHQ.Location" class="text-danger"/>
             </div>
+            <div class="form-group">
+                <div class="table">
+                    <table>
+                        <tr>
+                            @{ 
+                                int cnt = 0;
+
+                                foreach (var drink in Models.ass)
+                                {
+                                    if (cnt++ % 3 == 0)
+
+                                }
+                            }
+                                
+
+                                
+                                {
+
+                                }
+                                
+                                {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedDrinks"
+                                               value="@drink.DrinkID"
+                                               @(Html.Raw(drink.Assigned ? "checked=\"checked\"" : "") /> 
+                                        drink.DrinkID @: @drink.Name
+                                                @</td>
+      }
+                                                @:</tr>
+}
+
+        </table>
+        </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
         </form>
     </div>
 </div>
