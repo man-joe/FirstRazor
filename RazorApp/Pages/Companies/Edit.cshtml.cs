@@ -53,7 +53,7 @@ namespace RazorApp.Pages.Companies
         // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(int? id, string[] selectedDrinks)
         {
-            if(id ==null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -64,27 +64,31 @@ namespace RazorApp.Pages.Companies
                     .ThenInclude(i => i.Drink)
                 .FirstOrDefaultAsync(s => s.CompanyID == id);
 
-            if(companyToUpdate == null)
-            { 
+            if (companyToUpdate == null)
+            {
                 return NotFound();
             }
 
-            if(await TryUpdateModelAsync<Company> (
+            if (await TryUpdateModelAsync<Company>(
                 companyToUpdate,
                 "Company",
-                i => i.Name, 
-                i => i.FoundedDate, 
+                i => i.Name,
+                i => i.FoundedDate,
                 i => i.CompanyHQ))
             {
-                if(String.IsNullOrWhiteSpace(
+                if (String.IsNullOrWhiteSpace(
                     companyToUpdate.CompanyHQ?.Location))
                 {
                     companyToUpdate.CompanyHQ = null;
                 }
+                UpdateCompanyDrinks(_context, selectedDrinks, companyToUpdate);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
             UpdateCompanyDrinks(_context, selectedDrinks, companyToUpdate);
             PopulateAssignedDrinkData(_context, companyToUpdate);
             return Page();
+        }
            /* if (!ModelState.IsValid)
             {
                 return Page();
@@ -109,7 +113,7 @@ namespace RazorApp.Pages.Companies
             }
 
             return RedirectToPage("./Index");*/
-        }
+        
 
        /* private bool CompanyExists(int id)
         {

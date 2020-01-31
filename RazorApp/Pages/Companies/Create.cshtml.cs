@@ -10,7 +10,7 @@ using RazorApp.Models;
 
 namespace RazorApp.Pages.Companies
 {
-    public class CreateModel : PageModel
+    public class CreateModel : CompanyDrinksPageModel
     {
         private readonly RazorApp.Data.RestaurantContext _context;
 
@@ -21,6 +21,12 @@ namespace RazorApp.Pages.Companies
 
         public IActionResult OnGet()
         {
+            var company = new Company();
+            company.DrinkAssignments = new List<DrinkAssignment>();
+            // Provides an empty collection for the foreach loop
+            // foreach (var course in Model.AssignedCourseDataList)
+            // in the Create Razor page.
+            PopulateAssignedDrinkData(_context, company);
             return Page();
         }
 
@@ -29,9 +35,37 @@ namespace RazorApp.Pages.Companies
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string[] selectedDrinks)
         {
-            if (!ModelState.IsValid)
+            var newCompany = new Company();
+            if(selectedDrinks != null)
+            {
+                newCompany.DrinkAssignments = new List<DrinkAssignment>();
+                foreach (var drink in selectedDrinks)
+                {
+                    var drinkToAdd = new DrinkAssignment
+                    {
+                        DrinkID = int.Parse(drink)
+                    };
+                    newCompany.DrinkAssignments.Add(drinkToAdd);
+                }
+            }
+
+            if(await TryUpdateModelAsync<Company> (
+                newCompany,
+                "Company",
+                i => i.Name,
+                i => i.FoundedDate,
+                i => i.CompanyHQ))
+            {
+                _context.Companies.Add(newCompany);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            PopulateAssignedDrinkData(_context, newCompany);
+            return Page();
+
+           /* if (!ModelState.IsValid)
             {
                 return Page();
             }
@@ -39,7 +73,7 @@ namespace RazorApp.Pages.Companies
             _context.Companies.Add(Company);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index");*/
         }
     }
 }

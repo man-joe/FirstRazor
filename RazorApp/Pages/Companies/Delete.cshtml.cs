@@ -45,13 +45,28 @@ namespace RazorApp.Pages.Companies
                 return NotFound();
             }
 
-            Company = await _context.Companies.FindAsync(id);
+            Company company = await _context.Companies
+                .Include(i => i.DrinkAssignments)
+                .SingleAsync(i => i.CompanyID == id);
+
+            if(company == null)
+            {
+                return RedirectToPage("./Index");
+            }
+
+            var drinkCategories = await _context.DrinkCategories
+                .Where(d => d.CompanyID == id)
+                .ToListAsync();
+            drinkCategories.ForEach(d => d.CompanyID = null);
+            _context.Companies.Remove(company);
+            await _context.SaveChangesAsync();
+            /*Company = await _context.Companies.FindAsync(id);
 
             if (Company != null)
             {
                 _context.Companies.Remove(Company);
                 await _context.SaveChangesAsync();
-            }
+            }*/
 
             return RedirectToPage("./Index");
         }

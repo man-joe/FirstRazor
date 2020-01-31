@@ -35,33 +35,22 @@
                             @{ 
                                 int cnt = 0;
 
-                                foreach (var drink in Models.ass)
+                                foreach (var drink in Model.AssignedDrinkDataList)
                                 {
                                     if (cnt++ % 3 == 0)
-
-                                }
-                            }
-                                
-
-                                
-                                {
-
-                                }
-                                
-                                {
-                                    @:</tr><tr>
+                                    {
+                                        @:</tr><tr>
                                     }
                                     @:<td>
                                         <input type="checkbox"
                                                name="selectedDrinks"
                                                value="@drink.DrinkID"
-                                               @(Html.Raw(drink.Assigned ? "checked=\"checked\"" : "") /> 
-                                        drink.DrinkID @: @drink.Name
-                                                @</td>
-      }
-                                                @:</tr>
-}
-
+                                               @(Html.Raw(drink.Assigned ? "checked=\"checked\"" : "")) />
+                                               @drink.DrinkID @:   @drink.Name
+                                    @:</td>
+                                }
+                                @:</tr>
+                            }
         </table>
         </div>
         </div>
