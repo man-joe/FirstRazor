@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using RazorApp.Data;
 using RazorApp.Models;
 
-namespace RazorApp.Pages.Companies
+namespace RazorApp.Pages.DrinkCategories
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace RazorApp.Pages.Companies
             _context = context;
         }
 
-        public Company Company { get; set; }
+        public DrinkCategory DrinkCategory { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,9 +28,10 @@ namespace RazorApp.Pages.Companies
                 return NotFound();
             }
 
-            Company = await _context.Companies.FirstOrDefaultAsync(m => m.CompanyID == id);
+            DrinkCategory = await _context.DrinkCategories
+                .Include(d => d.CompanyHead).FirstOrDefaultAsync(m => m.DrinkCategoryID == id);
 
-            if (Company == null)
+            if (DrinkCategory == null)
             {
                 return NotFound();
             }

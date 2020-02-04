@@ -1,0 +1,49 @@
+﻿@page
+@model RazorApp.Pages.DrinkCategories.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>DrinkCategory</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DrinkCategory.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DrinkCategory.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DrinkCategory.MinProductionCost)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DrinkCategory.MinProductionCost)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DrinkCategory.Alcoholic)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DrinkCategory.Alcoholic)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DrinkCategory.RowVersion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DrinkCategory.RowVersion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DrinkCategory.CompanyHead)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DrinkCategory.CompanyHead.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.DrinkCategory.DrinkCategoryID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

@@ -1,0 +1,56 @@
+﻿@page "{id:int}"
+@model RazorApp.Pages.DrinkCategories.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>DrinkCategory</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="DrinkCategory.DrinkCategoryID" />
+            <input type="hidden" asp-for="DrinkCategory.RowVersion"/>
+            <div class="form-group">
+                <label>RowVersion</label>
+                @Model.DrinkCategory.RowVersion[7]
+            </div>
+            <div class="form-group">
+                <label asp-for="DrinkCategory.Name" class="control-label"></label>
+                <input asp-for="DrinkCategory.Name" class="form-control" />
+                <span asp-validation-for="DrinkCategory.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DrinkCategory.MinProductionCost" class="control-label"></label>
+                <input asp-for="DrinkCategory.MinProductionCost" class="form-control" />
+                <span asp-validation-for="DrinkCategory.MinProductionCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DrinkCategory.Alcoholic" class="control-label"></label>
+                <input asp-for="DrinkCategory.Alcoholic" class="form-control" />
+                <span asp-validation-for="DrinkCategory.Alcoholic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DrinkCategory.CompanyID" class="control-label"></label>
+                <select asp-for="DrinkCategory.CompanyID" class="form-control" 
+                        asp-items="@Model.CompanyNameSL"></select>
+                <span asp-validation-for="DrinkCategory.CompanyID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

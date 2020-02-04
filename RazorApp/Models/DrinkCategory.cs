@@ -22,6 +22,9 @@ namespace RazorApp.Models
 
         public int? CompanyID { get; set; }
 
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
+
         public Company CompanyHead { get; set; }
         public ICollection<Drink> Drinks { get; set; }
     }

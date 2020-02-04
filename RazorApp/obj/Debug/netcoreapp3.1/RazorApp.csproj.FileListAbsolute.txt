@@ -178,3 +178,8 @@ R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\Companies\Dele
 R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\Companies\Details.cshtml.g.cs
 R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\Companies\Edit.cshtml.g.cs
 R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\Companies\Index.cshtml.g.cs
+R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\DrinkCategories\Create.cshtml.g.cs
+R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\DrinkCategories\Delete.cshtml.g.cs
+R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\DrinkCategories\Details.cshtml.g.cs
+R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\DrinkCategories\Edit.cshtml.g.cs
+R:\cs_repos\RazorApp\RazorApp\obj\Debug\netcoreapp3.1\Razor\Pages\DrinkCategories\Index.cshtml.g.cs
